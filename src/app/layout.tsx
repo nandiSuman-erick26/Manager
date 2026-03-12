@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "Manager — Task & Inventory",
     description:
       "Track tasks, manage inventory, and monitor stock levels. Built with Next.js 16, React 19, Supabase, and TailwindCSS.",
-    url: "https://task-manager.vercel.app",
+    url: "https://task-manager-phi-wheat.vercel.app",
     siteName: "Task & Inventory Manager",
     type: "website",
     locale: "en_US",
