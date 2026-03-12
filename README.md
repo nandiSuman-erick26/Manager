@@ -150,5 +150,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ---
 
 <p align="center">
-  Developed by <u>Suman Nandi</u> for WebSkitters Academy
+  Developed by <strong>Suman Nandi</strong> for WebSkitters Academy
 </p>
