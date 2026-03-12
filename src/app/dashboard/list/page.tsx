@@ -43,16 +43,17 @@ const TaskList = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white dark:bg-zinc-900 p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm transition-colors gap-6">
-        <div className="flex items-center gap-5">
-          <div className="bg-brand text-white p-4 rounded-[1.5rem] shadow-lg shadow-brand/30">
-            <FileText size={32} />
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white dark:bg-zinc-900 p-5 sm:p-8 rounded-2xl sm:rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm transition-colors gap-4 sm:gap-6">
+        <div className="flex items-center gap-4">
+          <div className="bg-brand text-white p-3 sm:p-4 rounded-2xl sm:rounded-[1.5rem] shadow-lg shadow-brand/30">
+            <FileText size={24} className="sm:hidden" />
+            <FileText size={32} className="hidden sm:block" />
           </div>
           <div>
-            <h1 className="text-3xl font-black text-zinc-900 dark:text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white tracking-tight">
               Task List
             </h1>
-            <p className="text-zinc-500 font-medium text-sm">
+            <p className="text-zinc-500 font-medium text-xs sm:text-sm">
               Manage and track your primary objectives.
             </p>
           </div>
@@ -60,9 +61,9 @@ const TaskList = () => {
 
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
-            <Button className="h-14 px-8 bg-brand text-white font-black rounded-2xl shadow-xl shadow-brand/20 hover:scale-[1.02] active:scale-[0.98] transition-all gap-3 cursor-pointer">
+            <Button className="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 bg-brand text-white font-black rounded-2xl shadow-xl shadow-brand/20 hover:scale-[1.02] active:scale-[0.98] transition-all gap-3 cursor-pointer">
               Add Task
-              <PlusCircle size={22} />
+              <PlusCircle size={20} />
             </Button>
           </DialogTrigger>
           <DialogContent className="p-0 bg-transparent border-none shadow-none max-w-md">
@@ -76,8 +77,8 @@ const TaskList = () => {
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="relative flex-1">
+      <div className="flex flex-col gap-3">
+        <div className="relative">
           <Search
             className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400"
             size={18}
@@ -86,16 +87,20 @@ const TaskList = () => {
             placeholder="Search tasks here..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-12 h-14 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm focus:ring-brand focus:border-brand"
+            className="pl-12 h-12 sm:h-14 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm focus:ring-brand focus:border-brand"
           />
         </div>
 
-        <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 p-1.5 rounded-2xl border border-zinc-200 dark:border-zinc-700">
+        <div className="flex items-center gap-1 sm:gap-1.5 bg-zinc-100 dark:bg-zinc-800 p-1 sm:p-1.5 rounded-2xl border border-zinc-200 dark:border-zinc-700 overflow-x-auto no-scrollbar">
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setStatusFilter("all")}
-            className={`h-11 px-6 text-xs font-bold rounded-xl transition-all ${statusFilter === "all" ? "bg-brand text-white shadow-md shadow-brand/20" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+            className={`h-9 sm:h-11 px-4 sm:px-6 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 ${
+              statusFilter === "all"
+                ? "bg-brand text-white shadow-md shadow-brand/20"
+                : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+            }`}
           >
             All
           </Button>
@@ -103,7 +108,11 @@ const TaskList = () => {
             variant="ghost"
             size="sm"
             onClick={() => setStatusFilter("pending")}
-            className={`h-11 px-6 text-xs font-bold rounded-xl transition-all ${statusFilter === "pending" ? "bg-brand text-white shadow-md shadow-brand/20" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+            className={`h-9 sm:h-11 px-4 sm:px-6 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 ${
+              statusFilter === "pending"
+                ? "bg-brand text-white shadow-md shadow-brand/20"
+                : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+            }`}
           >
             Pending
           </Button>
@@ -111,7 +120,11 @@ const TaskList = () => {
             variant="ghost"
             size="sm"
             onClick={() => setStatusFilter("completed")}
-            className={`h-11 px-6 text-xs font-bold rounded-xl transition-all ${statusFilter === "completed" ? "bg-brand text-white shadow-md shadow-brand/20" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+            className={`h-9 sm:h-11 px-4 sm:px-6 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 ${
+              statusFilter === "completed"
+                ? "bg-brand text-white shadow-md shadow-brand/20"
+                : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+            }`}
           >
             Completed
           </Button>

@@ -55,7 +55,7 @@ const ProductForm = ({ product, onClose }: ProductFormProps) => {
   };
 
   return (
-    <Card className="w-[450px] p-8 space-y-6 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 shadow-2xl rounded-[2rem]">
+    <Card className="w-full max-w-md p-5 sm:p-8 space-y-6 bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 shadow-2xl rounded-[2rem]">
       <div className="space-y-1">
         <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
           {isEditMode ? "Edit Product" : "Add New Product"}

@@ -47,18 +47,18 @@ export default function Home() {
         </div>
 
         {/* CTAs */}
-        <div className="flex flex-row gap-4 items-center">
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
           <Button
             onClick={() => router.push("/dashboard")}
-            className="px-6 py-2.5 h-auto text-sm font-semibold cursor-pointer bg-amber-500 hover:bg-amber-600 text-white border-0 rounded-full shadow-md shadow-amber-200 dark:shadow-amber-900/30 transition-all"
+            className="w-full sm:w-auto px-6 py-2.5 h-auto text-sm font-semibold cursor-pointer bg-amber-500 hover:bg-amber-600 text-white border-0 rounded-full shadow-md shadow-amber-200 dark:shadow-amber-900/30 transition-all"
           >
             Get Started <MoveRight size={16} />
           </Button>
           <Link
             href="/dashboard"
-            className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 hover:underline underline-offset-4 transition-colors"
+            className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 hover:underline underline-offset-4 transition-colors px-4 py-2"
           >
-            Go to Dashboard{" "}
+            Go to Dashboard
           </Link>
         </div>
       </div>

@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Edit2, Trash2, Package, Layers, Info } from "lucide-react";
+import { Edit2, Trash2, Package } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -57,115 +57,185 @@ const ProductTable = ({
     );
   }
 
-  return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] overflow-hidden shadow-sm">
-      {/* Edit Dialog */}
-      <Dialog
-        open={!!editingProduct}
-        onOpenChange={() => setEditingProduct(null)}
-      >
-        <DialogContent className="p-0 bg-transparent border-none shadow-none max-w-md">
-          <DialogTitle className="sr-only">Edit Product</DialogTitle>
-          <DialogDescription className="sr-only">
-            Update product inventory
-          </DialogDescription>
-          {editingProduct && (
-            <ProductForm
-              product={editingProduct}
-              onClose={() => setEditingProduct(null)}
-            />
-          )}
-        </DialogContent>
-      </Dialog>
+  const EditDialog = () => (
+    <Dialog open={!!editingProduct} onOpenChange={() => setEditingProduct(null)}>
+      <DialogContent className="p-0 bg-transparent border-none shadow-none max-w-md">
+        <DialogTitle className="sr-only">Edit Product</DialogTitle>
+        <DialogDescription className="sr-only">
+          Update product inventory
+        </DialogDescription>
+        {editingProduct && (
+          <ProductForm
+            product={editingProduct}
+            onClose={() => setEditingProduct(null)}
+          />
+        )}
+      </DialogContent>
+    </Dialog>
+  );
 
-      <Table>
-        <TableHeader className="bg-zinc-50 dark:bg-zinc-800/50">
-          <TableRow className="border-zinc-200 dark:border-zinc-800">
-            <TableHead className="font-bold text-zinc-900 dark:text-white py-5 pl-8">
-              Product
-            </TableHead>
-            <TableHead className="font-bold text-zinc-900 dark:text-white">
-              Category
-            </TableHead>
-            <TableHead className="font-bold text-zinc-900 dark:text-white text-right px-6">
-              Price
-            </TableHead>
-            <TableHead className="font-bold text-zinc-900 dark:text-white text-center">
-              Stock
-            </TableHead>
-            <TableHead className="font-bold text-zinc-900 dark:text-white text-right pr-8">
-              Actions
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {products.map((product) => (
-            <TableRow
-              key={product.id}
-              className="border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/20 transition-colors"
-            >
-              <TableCell className="py-6 pl-8">
-                <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 bg-brand/10 rounded-xl flex items-center justify-center text-brand">
-                    <Package size={20} />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-zinc-900 dark:text-white">
-                      {product.name}
-                    </span>
-                    <span className="text-xs text-zinc-500 line-clamp-1 max-w-[200px]">
-                      {product.description || "No description provided."}
-                    </span>
-                  </div>
-                </div>
-              </TableCell>
-              <TableCell>
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-brand" />
-                  <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400 capitalize">
-                    {product.category}
-                  </span>
-                </div>
-              </TableCell>
-              <TableCell className="text-right px-6">
-                <span className="font-black text-zinc-900 dark:text-white leading-none">
-                  ₹{Number(product.price).toLocaleString()}
-                </span>
-              </TableCell>
-              <TableCell className="text-center">
-                <div
-                  className={`inline-flex px-3 py-1 rounded-full text-xs font-bold ${product.stock < 10 ? "bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400" : "bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400"}`}
-                >
-                  {product.stock} units
-                </div>
-              </TableCell>
-              <TableCell className="text-right pr-8">
-                <div className="flex items-center justify-end gap-2">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-9 w-9 rounded-xl text-zinc-400 hover:text-brand hover:bg-brand/10 transition-all"
-                    onClick={() => setEditingProduct(product)}
-                  >
-                    <Edit2 size={16} />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-9 w-9 rounded-xl text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all"
-                    onClick={() => {
-                      if (confirm("Are you sure?")) deleteProduct(product.id);
-                    }}
-                  >
-                    <Trash2 size={16} />
-                  </Button>
-                </div>
-              </TableCell>
+  return (
+    <>
+      <EditDialog />
+
+      {/* ─── Desktop Table (md+) ─── */}
+      <div className="hidden md:block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[2.5rem] overflow-hidden shadow-sm">
+        <Table>
+          <TableHeader className="bg-zinc-50 dark:bg-zinc-800/50">
+            <TableRow className="border-zinc-200 dark:border-zinc-800">
+              <TableHead className="font-bold text-zinc-900 dark:text-white py-5 pl-8">
+                Product
+              </TableHead>
+              <TableHead className="font-bold text-zinc-900 dark:text-white">
+                Category
+              </TableHead>
+              <TableHead className="font-bold text-zinc-900 dark:text-white text-right px-6">
+                Price
+              </TableHead>
+              <TableHead className="font-bold text-zinc-900 dark:text-white text-center">
+                Stock
+              </TableHead>
+              <TableHead className="font-bold text-zinc-900 dark:text-white text-right pr-8">
+                Actions
+              </TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+          </TableHeader>
+          <TableBody>
+            {products.map((product) => (
+              <TableRow
+                key={product.id}
+                className="border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/20 transition-colors"
+              >
+                <TableCell className="py-6 pl-8">
+                  <div className="flex items-center gap-4">
+                    <div className="h-10 w-10 bg-brand/10 rounded-xl flex items-center justify-center text-brand">
+                      <Package size={20} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-zinc-900 dark:text-white">
+                        {product.name}
+                      </span>
+                      <span className="text-xs text-zinc-500 line-clamp-1 max-w-[200px]">
+                        {product.description || "No description provided."}
+                      </span>
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <div className="h-2 w-2 rounded-full bg-brand" />
+                    <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400 capitalize">
+                      {product.category}
+                    </span>
+                  </div>
+                </TableCell>
+                <TableCell className="text-right px-6">
+                  <span className="font-black text-zinc-900 dark:text-white leading-none">
+                    ₹{Number(product.price).toLocaleString()}
+                  </span>
+                </TableCell>
+                <TableCell className="text-center">
+                  <div
+                    className={`inline-flex px-3 py-1 rounded-full text-xs font-bold ${product.stock < 10 ? "bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400" : "bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400"}`}
+                  >
+                    {product.stock} units
+                  </div>
+                </TableCell>
+                <TableCell className="text-right pr-8">
+                  <div className="flex items-center justify-end gap-2">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-9 w-9 rounded-xl text-zinc-400 hover:text-brand hover:bg-brand/10 transition-all"
+                      onClick={() => setEditingProduct(product)}
+                    >
+                      <Edit2 size={16} />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-9 w-9 rounded-xl text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all"
+                      onClick={() => {
+                        if (confirm("Are you sure?")) deleteProduct(product.id);
+                      }}
+                    >
+                      <Trash2 size={16} />
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* ─── Mobile Cards (< md) ─── */}
+      <div className="md:hidden space-y-3">
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-sm"
+          >
+            {/* Top row: icon + name + actions */}
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="h-10 w-10 shrink-0 bg-brand/10 rounded-xl flex items-center justify-center text-brand">
+                  <Package size={20} />
+                </div>
+                <div className="min-w-0">
+                  <p className="font-bold text-zinc-900 dark:text-white truncate">
+                    {product.name}
+                  </p>
+                  <p className="text-xs text-zinc-500 truncate">
+                    {product.description || "No description."}
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-1 shrink-0">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 rounded-xl text-zinc-400 hover:text-brand hover:bg-brand/10 transition-all"
+                  onClick={() => setEditingProduct(product)}
+                >
+                  <Edit2 size={14} />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 rounded-xl text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all"
+                  onClick={() => {
+                    if (confirm("Are you sure?")) deleteProduct(product.id);
+                  }}
+                >
+                  <Trash2 size={14} />
+                </Button>
+              </div>
+            </div>
+
+            {/* Bottom row: meta chips */}
+            <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <span className="flex items-center gap-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full capitalize">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand inline-block" />
+                {product.category}
+              </span>
+              <span className="text-xs font-black text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+                ₹{Number(product.price).toLocaleString()}
+              </span>
+              <span
+                className={`text-xs font-bold px-3 py-1 rounded-full ${
+                  product.stock < 10
+                    ? "bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400"
+                    : "bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400"
+                }`}
+              >
+                {product.stock} units
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

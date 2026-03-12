@@ -77,7 +77,7 @@ const TaskForm = ({ task, onClose }: TaskFormProps) => {
   };
 
   return (
-    <Card className="w-[450px] py-8 px-2 max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 transition-colors shadow-2xl">
+    <Card className="w-full max-w-md py-6 sm:py-8 px-1 sm:px-2 max-h-[95vh] overflow-y-auto bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 transition-colors shadow-2xl rounded-3xl sm:rounded-[2.5rem]">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 px-4">
         <div className="flex justify-between items-center bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-2xl border border-zinc-100 dark:border-zinc-700">
           <div className="flex flex-col">

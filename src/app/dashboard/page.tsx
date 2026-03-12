@@ -40,15 +40,15 @@ const Dashboard = () => {
   return (
     <div className="space-y-10 max-w-6xl mx-auto pb-10">
       {/* Welcome Section */}
-      <div className="bg-white dark:bg-zinc-900 p-8 md:p-12 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm transition-all relative overflow-hidden group">
+      <div className="bg-white dark:bg-zinc-900 p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm transition-all relative overflow-hidden group">
         <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
           <LayoutDashboard size={180} className="text-brand" />
         </div>
         <div className="relative z-10">
-          <h1 className="text-4xl font-black text-zinc-900 dark:text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-zinc-900 dark:text-white tracking-tight">
             Welcome back! 👋
           </h1>
-          <p className="text-zinc-500 dark:text-zinc-400 mt-3 text-lg font-medium max-w-2xl leading-relaxed">
+          <p className="text-zinc-500 dark:text-zinc-400 mt-3 text-sm sm:text-lg font-medium max-w-2xl leading-relaxed">
             You're managing{" "}
             <span className="text-brand font-bold">
               {taskStats.pending} tasks
@@ -73,9 +73,9 @@ const Dashboard = () => {
         <h2 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-400 pl-2">
           Task Overview
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
           {/* Total Tasks */}
-          <div className="bg-brand-light dark:bg-brand/10 p-8 rounded-[2rem] border border-brand/20 shadow-sm hover:shadow-md transition-all">
+          <div className="bg-brand-light dark:bg-brand/10 p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-brand/20 shadow-sm hover:shadow-md transition-all">
             <div className="bg-brand/10 w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-brand">
               <ListTodo size={24} />
             </div>
@@ -85,14 +85,14 @@ const Dashboard = () => {
             {tasksLoading ? (
               <Spinner className="mt-2 h-4 w-4" />
             ) : (
-              <p className="text-4xl font-black text-zinc-900 dark:text-white">
+              <p className="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-white">
                 {taskStats.total}
               </p>
             )}
           </div>
 
           {/* Completed */}
-          <div className="bg-green-50 dark:bg-green-500/10 p-8 rounded-[2rem] border border-green-200 dark:border-green-500/20 shadow-sm hover:shadow-md transition-all">
+          <div className="bg-green-50 dark:bg-green-500/10 p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-green-200 dark:border-green-500/20 shadow-sm hover:shadow-md transition-all">
             <div className="bg-green-500/10 w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-green-600 dark:text-green-400">
               <CheckCircle2 size={24} />
             </div>
@@ -102,14 +102,14 @@ const Dashboard = () => {
             {tasksLoading ? (
               <Spinner className="mt-2 h-4 w-4" />
             ) : (
-              <p className="text-4xl font-black text-green-900 dark:text-green-300">
+              <p className="text-3xl sm:text-4xl font-black text-green-900 dark:text-green-300">
                 {taskStats.completed}
               </p>
             )}
           </div>
 
           {/* Pending */}
-          <div className="bg-amber-50 dark:bg-amber-500/10 p-8 rounded-[2rem] border border-amber-200 dark:border-amber-500/20 shadow-sm hover:shadow-md transition-all">
+          <div className="bg-amber-50 dark:bg-amber-500/10 p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-amber-200 dark:border-amber-500/20 shadow-sm hover:shadow-md transition-all">
             <div className="bg-amber-500/10 w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-amber-600 dark:text-amber-400">
               <Clock size={24} />
             </div>
@@ -119,7 +119,7 @@ const Dashboard = () => {
             {tasksLoading ? (
               <Spinner className="mt-2 h-4 w-4" />
             ) : (
-              <p className="text-4xl font-black text-amber-900 dark:text-amber-300">
+              <p className="text-3xl sm:text-4xl font-black text-amber-900 dark:text-amber-300">
                 {taskStats.pending}
               </p>
             )}
@@ -131,9 +131,9 @@ const Dashboard = () => {
         <h2 className="text-xs font-black uppercase tracking-[0.2em] text-zinc-400 pl-2">
           Product Overview
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
           {/* Total Products */}
-          <div className="bg-zinc-50 dark:bg-zinc-800/50 p-8 rounded-[2rem] border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-all">
+          <div className="bg-zinc-50 dark:bg-zinc-800/50 p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-all">
             <div className="bg-zinc-200 dark:bg-zinc-700 w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-zinc-600 dark:text-zinc-300">
               <ShoppingBag size={24} />
             </div>
@@ -143,14 +143,14 @@ const Dashboard = () => {
             {productsLoading ? (
               <Spinner className="mt-2 h-4 w-4" />
             ) : (
-              <p className="text-4xl font-black text-zinc-900 dark:text-white">
+              <p className="text-3xl sm:text-4xl font-black text-zinc-900 dark:text-white">
                 {productStats.total}
               </p>
             )}
           </div>
 
           {/* Total Value */}
-          <div className="bg-indigo-50 dark:bg-indigo-500/10 p-8 rounded-[2rem] border border-indigo-200 dark:border-indigo-500/20 shadow-sm hover:shadow-md transition-all">
+          <div className="bg-indigo-50 dark:bg-indigo-500/10 p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-indigo-200 dark:border-indigo-500/20 shadow-sm hover:shadow-md transition-all">
             <div className="bg-indigo-500/10 w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-indigo-600 dark:text-indigo-400">
               <DollarSign size={24} />
             </div>
@@ -160,14 +160,14 @@ const Dashboard = () => {
             {productsLoading ? (
               <Spinner className="mt-2 h-4 w-4" />
             ) : (
-              <p className="text-4xl font-black text-indigo-900 dark:text-indigo-300">
+              <p className="text-3xl sm:text-4xl font-black text-indigo-900 dark:text-indigo-300">
                 ₹{productStats.totalValue.toLocaleString()}
               </p>
             )}
           </div>
 
           {/* Low Stock */}
-          <div className="bg-red-50 dark:bg-red-500/10 p-8 rounded-[2rem] border border-red-200 dark:border-red-500/20 shadow-sm hover:shadow-md transition-all">
+          <div className="bg-red-50 dark:bg-red-500/10 p-5 sm:p-8 rounded-2xl sm:rounded-[2rem] border border-red-200 dark:border-red-500/20 shadow-sm hover:shadow-md transition-all">
             <div className="bg-red-500/10 w-12 h-12 rounded-2xl flex items-center justify-center mb-4 text-red-600 dark:text-red-400">
               <AlertTriangle size={24} />
             </div>

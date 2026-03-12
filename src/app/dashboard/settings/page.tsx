@@ -23,11 +23,11 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-zinc-900 dark:text-white tracking-tight">
+      <div className="px-1 sm:px-0">
+        <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white tracking-tight">
           Settings
         </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 mt-1">
           Manage your application appearance and preferences.
         </p>
       </div>
@@ -49,7 +49,7 @@ export default function SettingsPage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setTheme("light")}
-                  className={`flex-1 gap-2 rounded-xl transition-all ${theme === "light" ? "bg-white dark:bg-zinc-700 shadow-md text-zinc-900 dark:text-white ring-1 ring-zinc-200 dark:ring-zinc-600" : "text-zinc-500 hover:text-zinc-700"}`}
+                  className={`flex-1 gap-2 rounded-xl transition-all text-xs sm:text-sm h-9 sm:h-10 ${theme === "light" ? "bg-white dark:bg-zinc-700 shadow-md text-zinc-900 dark:text-white ring-1 ring-zinc-200 dark:ring-zinc-600" : "text-zinc-500 hover:text-zinc-700"}`}
                 >
                   <Sun className="h-4 w-4" />
                   Light
@@ -58,7 +58,7 @@ export default function SettingsPage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setTheme("dark")}
-                  className={`flex-1 gap-2 rounded-xl transition-all ${theme === "dark" ? "bg-white dark:bg-zinc-700 shadow-md text-zinc-900 dark:text-white ring-1 ring-zinc-200 dark:ring-zinc-600" : "text-zinc-500 hover:text-zinc-700"}`}
+                  className={`flex-1 gap-2 rounded-xl transition-all text-xs sm:text-sm h-9 sm:h-10 ${theme === "dark" ? "bg-white dark:bg-zinc-700 shadow-md text-zinc-900 dark:text-white ring-1 ring-zinc-200 dark:ring-zinc-600" : "text-zinc-500 hover:text-zinc-700"}`}
                 >
                   <Moon className="h-4 w-4" />
                   Dark
@@ -67,7 +67,7 @@ export default function SettingsPage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setTheme("system")}
-                  className={`flex-1 gap-2 rounded-xl transition-all ${theme === "system" ? "bg-white dark:bg-zinc-700 shadow-md text-zinc-900 dark:text-white ring-1 ring-zinc-200 dark:ring-zinc-600" : "text-zinc-500 hover:text-zinc-700"}`}
+                  className={`flex-1 gap-2 rounded-xl transition-all text-xs sm:text-sm h-9 sm:h-10 ${theme === "system" ? "bg-white dark:bg-zinc-700 shadow-md text-zinc-900 dark:text-white ring-1 ring-zinc-200 dark:ring-zinc-600" : "text-zinc-500 hover:text-zinc-700"}`}
                 >
                   <Monitor className="h-4 w-4" />
                   System

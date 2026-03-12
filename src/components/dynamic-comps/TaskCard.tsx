@@ -111,58 +111,61 @@ const TaskCard = ({ tasks }: { tasks: Task[] | undefined }) => {
         </DialogContent>
       </Dialog>
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-zinc-50 dark:bg-zinc-900 p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 transition-colors">
-        <h2 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest pl-2">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-zinc-50 dark:bg-zinc-900 p-4 sm:p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 transition-colors">
+        <h2 className="text-[10px] sm:text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest pl-1 sm:pl-2">
           {selectedIds.length > 0
             ? `${selectedIds.length} Selected`
             : "Your Tasks"}
         </h2>
 
         {selectedIds.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2">
-            {selectedIds.length < tasks.length ? (
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              {selectedIds.length < tasks.length ? (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleSelectAll}
+                  className="flex-1 sm:flex-none h-9 text-xs font-bold text-brand hover:bg-brand/10 transition-colors rounded-xl"
+                >
+                  Select All
+                </Button>
+              ) : (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleDeselectAll}
+                  className="flex-1 sm:flex-none h-9 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors rounded-xl"
+                >
+                  <RotateCcw className="h-3.5 w-3.5 mr-1" />
+                  De-select
+                </Button>
+              )}
+
+              <div className="h-4 w-px bg-zinc-300 dark:bg-zinc-700 mx-1 hidden sm:block" />
+
               <Button
-                variant="ghost"
                 size="sm"
-                onClick={handleSelectAll}
-                className="h-8 text-xs font-bold text-brand hover:bg-brand/10 transition-colors"
+                onClick={handleBulkComplete}
+                disabled={isBulkUpdating}
+                className="flex-1 sm:flex-none h-9 text-[10px] font-black bg-brand hover:opacity-90 text-white gap-2 shadow-md shadow-brand/20 rounded-xl"
               >
-                Select All
+                <CheckCircle2 size={12} />
+                <span className="hidden xs:inline">Complete</span>
+                <span className="xs:hidden">Done</span>
               </Button>
-            ) : (
+
               <Button
-                variant="ghost"
                 size="sm"
-                onClick={handleDeselectAll}
-                className="h-8 text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                variant="destructive"
+                onClick={handleBulkDelete}
+                disabled={isBulkDeleting}
+                className="flex-1 sm:flex-none h-9 text-[10px] font-black gap-2 shadow-md shadow-red-500/10 rounded-xl"
               >
-                <RotateCcw className="h-3.5 w-3.5 mr-1" />
-                De-select
+                <Trash2 size={12} />
+                Delete
               </Button>
-            )}
-
-            <div className="h-4 w-px bg-zinc-300 dark:bg-zinc-700 mx-1 hidden md:block" />
-
-            <Button
-              size="sm"
-              onClick={handleBulkComplete}
-              disabled={isBulkUpdating}
-              className="h-8 text-[10px] font-bold bg-brand hover:opacity-90 text-white gap-2 shadow-sm rounded-lg"
-            >
-              <CheckCircle2 size={12} />
-              Complete Selected
-            </Button>
-
-            <Button
-              size="sm"
-              variant="destructive"
-              onClick={handleBulkDelete}
-              disabled={isBulkDeleting}
-              className="h-8 text-[10px] font-bold gap-2 shadow-sm rounded-lg"
-            >
-              <Trash2 size={12} />
-              Delete Selected
-            </Button>
+            </div>
           </div>
         )}
       </div>
@@ -207,26 +210,36 @@ const TaskCard = ({ tasks }: { tasks: Task[] | undefined }) => {
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 text-[10px] font-bold">
+            <div className="flex flex-wrap items-center gap-2 xs:gap-3 text-[9px] xs:text-[10px] font-bold">
               {item.date && (
                 <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-2 py-1 rounded-lg">
                   <Calendar size={10} />
-                  {new Date(item.date).toLocaleDateString()}
+                  {new Date(item.date).toLocaleDateString(undefined, {
+                    month: "short",
+                    day: "numeric",
+                  })}
                 </div>
               )}
               {(item.start || item.end) && (
                 <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-2 py-1 rounded-lg">
                   <Clock size={10} />
-                  {item.start} - {item.end}
+                  {item.start}{item.end && ` - ${item.end}`}
                 </div>
               )}
               <div
-                className={`px-2 py-1 rounded-lg border flex items-center gap-1.5 ${item.isCompleted ? "bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/20 text-green-700 dark:text-green-400" : "bg-brand/5 border-brand/20 text-brand"}`}
+                className={`px-2 py-1 rounded-lg border flex items-center gap-1.5 ${
+                  item.isCompleted
+                    ? "bg-green-50 dark:bg-green-500/10 border-green-200 dark:border-green-500/20 text-green-700 dark:text-green-400"
+                    : "bg-brand/5 border-brand/20 text-brand"
+                }`}
               >
                 <div
-                  className={`h-1.5 w-1.5 rounded-full ${item.isCompleted ? "bg-green-500" : "bg-brand"}`}
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    item.isCompleted ? "bg-green-500" : "bg-brand"
+                  }`}
                 />
-                {item.isCompleted ? "Completed" : "Pending"}
+                <span className="hidden xs:inline">{item.isCompleted ? "Completed" : "Pending"}</span>
+                <span className="xs:hidden">{item.isCompleted ? "Done" : "Wait"}</span>
               </div>
             </div>
 
